@@ -7,9 +7,12 @@
 int main()
 {
 	My_uint16_tInterface* a = new My_uint16_t_0;
-	printf( "%d\n", *(int*)(a->stuff()) );
-	a = a->next();
-	printf( "%d\n", *(int*)(a->stuff()) );
+	
+	while( *(int*)(a->stuff()) < 20 )
+	{
+		printf( "%d\n", *(int*)(a->stuff()) );
+		a = a->next();
+	}
 	
 	return 0;
 }

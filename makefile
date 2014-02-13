@@ -19,16 +19,16 @@ all: $(TARGET) $(SO_TARGET)
 
 $(TARGET): CPPFLAGS += -fPIC
 $(TARGET): build $(OBJECTS)
-	ar rcs $@ $(OBJECTS)
-	ranlib $@
+	@ar rcs $@ $(OBJECTS)
+	@ranlib $@
 
 $(SO_TARGET): $(TARGET) $(OBJECTS)
-	$(CC) -shared -std=c++11 -o $@ $(OBJECTS)
+	@$(CC) -shared -std=c++11 -o $@ $(OBJECTS)
 
 # target: build     Create the build and bin directories
 build:
-	mkdir -p build
-	mkdir -p bin
+	@mkdir -p build
+	@mkdir -p bin
 
 # target: tests     Compile the test code.
 # This needs to run `g++ -std=c++11 -g -Wall -Wextra -pedantic -o tests/prog3B tests/prog3B.cpp build/libprog3b.a -Isrc'
@@ -37,25 +37,25 @@ build:
 #tests: $(TESTS) $(CPPFLAGS_MORE)
 #	mv tests/prog3B bin/prog3B
 tests:
-	g++ -std=c++11 -g -Wall -Wextra -pedantic -o tests/prog3B tests/prog3B.cpp build/libprog3b.a -Isrc
-	mv tests/prog3B bin/prog3B
+	@g++ -std=c++11 -g -Wall -Wextra -pedantic -o tests/prog3B tests/prog3B.cpp build/libprog3b.a -Isrc
+	@mv tests/prog3B bin/prog3B
 
 # target: clean     Remove the compiled files.
 .PHONY: clean
 clean:
-	rm -rf build $(OBJECTS) $(TESTS)
-	find . -name "*.gc*" -exec rm {} \;
-	find . -name "*.*~" -exec rm {} \;
-	rm -rf `find . -name "*.dSYM" -print`
-	rm -rf **/test test
+	@rm -rf build $(OBJECTS) $(TESTS)
+	@find . -name "*.gc*" -exec rm {} \;
+	@find . -name "*.*~" -exec rm {} \;
+	@rm -rf `find . -name "*.dSYM" -print`
+	@rm -rf **/test test
 
 # target: install   Install the library to the prefixed directory.
 .PHONY: install
 install: all
-	install -d $(DESTDIR)/$(PREFIX)/lib/
-	install $(TARGET) $(DESTDIR)/$(PREFIX)/lib/
-	echo Installed to $(DESTDIR)/$(PREFIX)/lib
+	@install -d $(DESTDIR)/$(PREFIX)/lib/
+	@install $(TARGET) $(DESTDIR)/$(PREFIX)/lib/
+	@echo Installed to $(DESTDIR)/$(PREFIX)/lib
 
 # target: help      List the available targets
 help:
-	egrep "^# target:" [Mm]akefile
+	@egrep "^# target:" [Mm]akefile
