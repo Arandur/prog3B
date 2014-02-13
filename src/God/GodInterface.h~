@@ -1,0 +1,8 @@
+#pragma once
+
+class GodInterface :
+	public ObjectInterface
+{
+public:
+	
+};
