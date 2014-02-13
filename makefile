@@ -16,9 +16,6 @@ SO_TARGET=$(patsubst %.a,%.so,$(TARGET))
 # target: all       Default target. Creates all the important files.
 all: $(TARGET) $(SO_TARGET)
 
-dev: CPPFLAGS=-std=c++11 -g -Isrc -Wall -Wextra -pedantic $(OPTFLAGS)
-dev: all
-
 $(TARGET): CPPFLAGS += -fPIC
 $(TARGET): build $(OBJECTS)
 	ar rcs $@ $(OBJECTS)
