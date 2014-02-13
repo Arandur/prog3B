@@ -7,5 +7,5 @@ class My_uint16_t_1 :
 {
 public:
 	My_uint16_tInterface* next() const;
-	void* stuff( God* = 0 ) const;
+	void* stuff( God* = 0 );
 };

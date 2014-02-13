@@ -41,12 +41,15 @@ def crawl( top ):
 	for dirpath, dirnames, filenames in os.walk( top ):
 		for filename in filenames:
 			if any( filename.endswith( suffix ) for suffix in CODE_SUFFICES ):
-				nLines[ filename ] = countLOC( os.path.join( dirpath, filename ) )
+				nLines[ os.path.join( os.path.relpath( dirpath, top ), filename ) ] \
+				= countLOC( os.path.join( dirpath, filename ) )
 	
 	return nLines
 
 if __name__ == '__main__':
 	import sys
+	
+	os.chdir( os.path.dirname( sys.argv[0] ) )
 	
 	try:
 		if len( sys.argv ) == 1:
@@ -63,7 +66,8 @@ if __name__ == '__main__':
 				print "Total:", sum( nLines.itervalues() )
 		else:
 			with open( "lines.txt", "w" ) as f:
-				f.writelines( "{} {}".format( i, lines ) for i, lines in nLines.iteritems() )
+				f.writelines( "{} {}\n".format( i, lines ) \
+				for i, lines in nLines.iteritems() )
 				print "Total:", sum( nLines.itervalues() )
 				print "Details written to lines.txt"
 	except OSError as e:

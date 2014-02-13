@@ -6,6 +6,6 @@ class My_uint16_t_0 :
 	public My_uint16_tInterface
 {
 public:
-	virtual My_uint16_tInterface* next() const;
-	virtual void* stuff( God* = 0 ) const;
+	My_uint16_tInterface* next() const;
+	void* stuff( God* = 0 );
 };

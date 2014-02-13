@@ -5,5 +5,5 @@ class God;
 class ObjectInterface
 {
 public:
-	virtual void* stuff( God* = 0 ) const = 0;
+	virtual void* stuff( God* = 0 ) = 0;
 };
