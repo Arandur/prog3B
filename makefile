@@ -1,4 +1,5 @@
-CPPFLAGS=-std=c++11 -g -Wall -Wextra -pedantic -Isrc $(OPTFLAGS)
+CPPFLAGS=-std=c++11 -g -Wall -Wextra -pedantic $(OPTFLAGS)
+CPPFLAGS_MORE=-Isrc
 LIBS=-ldl $(OPTLIBS)
 PREFIX?=usr/local
 CC=g++
@@ -30,10 +31,14 @@ build:
 	mkdir -p bin
 
 # target: tests     Compile the test code.
+# This needs to run `g++ -std=c++11 -g -Wall -Wextra -pedantic -o tests/prog3B tests/prog3B.cpp build/libprog3b.a -Isrc'
 .PHONY: tests
-tests: CPPFLAGS += $(TARGET)
-tests: $(TESTS)
-	mv tests/prog3B bin/test
+#tests: CPPFLAGS += $(TARGET)
+#tests: $(TESTS) $(CPPFLAGS_MORE)
+#	mv tests/prog3B bin/prog3B
+tests:
+	g++ -std=c++11 -g -Wall -Wextra -pedantic -o tests/prog3B tests/prog3B.cpp build/libprog3b.a -Isrc
+	mv tests/prog3B bin/prog3B
 
 # target: clean     Remove the compiled files.
 .PHONY: clean
