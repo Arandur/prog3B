@@ -29,6 +29,8 @@ $(SO_TARGET): $(TARGET) $(OBJECTS)
 # Also creates all the insane .cpp and .h files
 build:
 	python src/My_uint16_t/make.py
+	python src/GodGetter/GodGetter_char/make.py
+	python src/My_char/make.py
 	mkdir -p bin
 	mkdir -p build
 
@@ -48,6 +50,8 @@ clean:
 	rm -rf `find . -name "*.dSYM" -print`
 	rm -rf **/test test
 	rm -rf src/My_uint16_t/*.h src/My_uint16_t/*.cpp
+	rm -rf src/My_char/*.h src/My_char/*.cpp
+	rm -rf src/GodGetter/GodGetter_char/*.h src/GodGetter/GodGetter_char/*.cpp
 
 # target: install   Install the library to the prefixed directory.
 .PHONY: install
